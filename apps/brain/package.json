@@ -1,0 +1,29 @@
+{
+	"name": "@assistant/brain",
+	"version": "1.0.0",
+	"description": "Aivot",
+	"type": "module",
+	"scripts": {
+		"dev": "tsx watch ./app/index.ts",
+		"lint": "biome check ./",
+		"lint:fix": "biome check --apply-unsafe ./",
+		"typecheck": "tsc",
+		"build": "tsc"
+	},
+	"dependencies": {
+		"fp-ts": "^2.12.1",
+		"io-ts": "^2.2.16",
+		"luxon": "^2.3.2",
+		"pino": "^8.16.2"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.4.1",
+		"@types/luxon": "^2.3.1",
+		"@types/node": "^20.10.3",
+		"dotenv": "^16.0.0",
+		"pino-pretty": "^10.2.3",
+		"tsx": "^4.19.1",
+		"typescript": "^4.6.4",
+		"vitest": "^1.0.2"
+	}
+}

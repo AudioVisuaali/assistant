@@ -1,0 +1,26 @@
+{
+  "name": "@assistant/human",
+  "version": "3.2.0",
+  "private": true,
+  "packageManager": "npm@10.8.3",
+  "engines": {
+    "npm": ">=9",
+    "node": ">=19"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "FORCE_COLOR=1 npx turbo run build",
+    "dev": "FORCE_COLOR=1 npx turbo run dev",
+    "typecheck": "turbo run typecheck",
+    "lint": "FORCE_COLOR=1 npx turbo run lint",
+    "lint:fix": "FORCE_COLOR=1 npx turbo run lint:fix",
+    "build:eat": "npx turbo run build --filter=@assistant/ear",
+    "build:brain": "npx turbo run build --filter=@assistant/brain"
+  },
+  "devDependencies": {
+    "turbo": "^2.1.2"
+  }
+}
