@@ -4,7 +4,7 @@
 	"description": "Aivot",
 	"type": "module",
 	"scripts": {
-		"dev": "tsx watch ./app/index.ts",
+		"dev": "tsx watch --env-file=.env ./app/index.ts",
 		"lint": "biome check ./",
 		"lint:fix": "biome check --apply-unsafe ./",
 		"typecheck": "tsc",
@@ -20,6 +20,7 @@
 		"@biomejs/biome": "^1.4.1",
 		"@types/luxon": "^2.3.1",
 		"@types/node": "^20.10.3",
+		"@types/socket.io": "^3.0.2",
 		"dotenv": "^16.0.0",
 		"pino-pretty": "^10.2.3",
 		"tsx": "^4.19.1",
