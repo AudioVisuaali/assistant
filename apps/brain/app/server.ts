@@ -1,6 +1,7 @@
 import { createServer as createServerNode } from "node:http";
 import { Server } from "socket.io";
 import type { Config } from "./config/config";
+import { openAICompletion } from "./services/openAIService";
 
 type Params = {
 	config: Config;
@@ -12,8 +13,11 @@ export function createServer({ config }: Params) {
 		cors: { origin: "http://localhost:5173" },
 	});
 
-	io.on("connection", () => {
+	io.on("connection", (socket) => {
 		console.log("a user connected");
+		socket.on("message", (a) => {
+			openAICompletion(a, config.openAI).then(console.log);
+		});
 	});
 
 	return () => {
