@@ -1,6 +1,7 @@
 import type { MetaFunction } from "@remix-run/node";
 import { ClientSide } from "~/components/ClientSide";
 import { Ear } from "~/components/Ear";
+import { SocketIOProvder } from "~/providers/SocketIOProvider";
 
 export const meta: MetaFunction = () => {
 	return [
@@ -12,7 +13,9 @@ export const meta: MetaFunction = () => {
 export default function Index() {
 	return (
 		<ClientSide>
-			<Ear />
+			<SocketIOProvder>
+				<Ear />
+			</SocketIOProvder>
 		</ClientSide>
 	);
 }

@@ -8,7 +8,9 @@ type Params = {
 
 export function createServer({ config }: Params) {
 	const server = createServerNode();
-	const io = new Server(server);
+	const io = new Server(server, {
+		cors: { origin: "http://localhost:5173" },
+	});
 
 	io.on("connection", () => {
 		console.log("a user connected");

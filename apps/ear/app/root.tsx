@@ -1,4 +1,5 @@
 import type { LinksFunction } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
 import {
 	Links,
 	Meta,
@@ -6,6 +7,8 @@ import {
 	Scripts,
 	ScrollRestoration,
 } from "@remix-run/react";
+import type { ReactNode } from "react";
+import { getConfigServer } from "./config/configServer";
 
 export const links: LinksFunction = () => [
 	{ rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -20,7 +23,17 @@ export const links: LinksFunction = () => [
 	},
 ];
 
-export function Layout({ children }: { children: React.ReactNode }) {
+export async function loader() {
+	const config = getConfigServer();
+
+	return {
+		env: {
+			WS_ENDPOINT: config.wsEndpoint,
+		},
+	};
+}
+
+export function Layout({ children }: { children: ReactNode }) {
 	return (
 		<html lang="en">
 			<head>
@@ -39,5 +52,18 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-	return <Outlet />;
+	const { env } = useLoaderData<typeof loader>();
+
+	return (
+		<>
+			<Outlet />
+
+			<script
+				// biome-ignore lint/security/noDangerouslySetInnerHtml: Pass shared environment variables to client.
+				dangerouslySetInnerHTML={{
+					__html: `window.ENV = ${JSON.stringify(env)}`,
+				}}
+			/>
+		</>
+	);
 }
